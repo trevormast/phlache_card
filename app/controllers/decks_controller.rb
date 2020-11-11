@@ -5,10 +5,6 @@ class DecksController < ApplicationController
     @decks = @user.decks
   end
 
-  def show
-    @deck = Deck.find(params[:id])
-  end
-
   def new
     @deck = @user.decks.build
   end
@@ -17,9 +13,9 @@ class DecksController < ApplicationController
     @deck = @user.decks.build(deck_params)
 
     if @deck.save
-      redirect_to user_decks_path(current_user)
+      redirect_to user_decks_path(@user)
     else
-      redirect_to new_user_deck(current_user)
+      redirect_to new_user_deck(@user)
     end
   end
 
@@ -31,9 +27,9 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
 
     if @deck.update(deck_params)
-      redirect_to user_decks_path(current_user)
+      redirect_to user_decks_path(@user)
     else
-      redirect_to edit_user_deck(current_user, @deck)
+      redirect_to edit_user_deck(@user, @deck)
     end
   end
 
@@ -42,7 +38,7 @@ class DecksController < ApplicationController
 
     @deck.destroy
 
-    redirect_to user_decks_path(current_user )
+    redirect_to user_decks_path(@user)
   end
 
   private

@@ -1,0 +1,14 @@
+<h1>Cards for "<%= @deck.name.titleize %>"</h1>
+<br>
+<%= link_to 'New Card', new_user_deck_card_path(@user, @deck) %>
+<br><br>
+
+<ul>
+  <% @cards.each do |card| %>
+    <li>
+      <%= card.front %>
+      <%= link_to 'edit', edit_user_deck_card_path(@user, @deck, card) %>
+      <%= link_to 'delete', user_deck_card_path(@user, @deck, card), method: :delete %>
+    </li>
+  <% end %>
+</ul>

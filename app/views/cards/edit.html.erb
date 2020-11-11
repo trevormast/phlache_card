@@ -1,0 +1,11 @@
+<h1>Edit Card</h1>
+<br><br>
+<%= form_for @card, url: user_deck_card_path(current_user, @deck, @card) do |f| %>
+  <%= f.label :front %><br>
+  <%= f.text_field :front %>
+  <br><br>
+  <%= f.label :back %><br>
+  <%= f.text_field :back %>
+
+  <%= f.submit %>
+<% end %>
