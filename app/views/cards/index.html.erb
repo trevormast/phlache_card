@@ -1,14 +1,44 @@
+<style type="text/css">
+  .hidden { display: none !important; }
+
+  #card-practice { display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 75px 25px; }
+  #card-holder { border-radius: 20px; border: 1px solid black; }
+</style>
+
 <h1>Cards for "<%= @deck.name.titleize %>"</h1>
 <br>
 <%= link_to 'New Card', new_user_deck_card_path(@user, @deck) %>
 <br><br>
 
-<ul>
-  <% @cards.each do |card| %>
-    <li>
-      <%= card.front %>
-      <%= link_to 'edit', edit_user_deck_card_path(@user, @deck, card) %>
-      <%= link_to 'delete', user_deck_card_path(@user, @deck, card), method: :delete %>
-    </li>
-  <% end %>
-</ul>
+<div id="card-index">
+  <ul>
+    <% @cards.each do |card| %>
+      <li>
+        <%= card.front %>
+        <%= link_to 'edit', edit_user_deck_card_path(@user, @deck, card) %>
+        <%= link_to 'delete', user_deck_card_path(@user, @deck, card), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+  <br><br><br>
+  <%= content_tag :a, 'practice!', id: 'start-practice', class: 'js-toggle-practice' %>
+</div>
+
+<div id="card-practice" class="hidden">
+  <div id="card-holder">
+    <div id="card-text"></div>
+  </div>
+
+  <br><br><br>
+  <%= content_tag :a, 'end practice!', id: 'start-practice', class: 'js-toggle-practice' %>
+</div>
+
+<script type="text/javascript">
+  const cards = JSON.parse(`<%= @cards.to_json(only: [:front, :back, :weight]).html_safe %>`);
+
+  $(document).ready(function() {
+    $('.js-toggle-practice').click(togglePractice);
+  })
+
+  function togglePractice() { $('#card-practice, #card-index').toggleClass('hidden'); }
+</script>
