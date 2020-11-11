@@ -1,0 +1,9 @@
+<h1>New Deck</h1>
+<br><br>
+
+<%= form_for @deck, url: user_decks_path(current_user, @deck) do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>
