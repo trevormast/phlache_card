@@ -34,7 +34,9 @@
 </div>
 
 <script type="text/javascript">
-  const cards = JSON.parse(`<%= @cards.to_json(only: [:front, :back, :weight]).html_safe %>`);
+  const cardsArray = JSON.parse(`<%= @cards.to_json(only: [:front, :back, :weight]).html_safe %>`);
+
+  const deck = new Deck(cardsArray);
 
   $(document).ready(function() {
     $('.js-toggle-practice').click(togglePractice);
@@ -45,7 +47,7 @@
   })
 
   function chooseCard() {
-    let card = cards[Math.floor(Math.random() * cards.length)];
+    let card = deck.chooseCard();
 
     $('#card-text').text(card.front);
 
