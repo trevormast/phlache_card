@@ -4,7 +4,7 @@
 
 <% @decks.each do |deck| %>
   <h3>
-    <%= link_to deck.name, user_deck_cards_path(current_user, deck) %>
+    <%= link_to deck.name, user_deck_path(current_user, deck) %>
     <%= link_to 'edit', edit_user_deck_path(current_user, deck) %>
     <%= link_to 'delete', user_deck_path(current_user, deck), method: :delete %>
   </h3>

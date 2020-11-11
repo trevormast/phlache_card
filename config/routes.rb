@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: [] do
-    resources :decks, only: [:index, :new, :create, :edit, :update, :destroy] do
-      resources :cards, except: [:show]
+    resources :decks, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :cards, except: [:show, :index]
     end
   end
 end
