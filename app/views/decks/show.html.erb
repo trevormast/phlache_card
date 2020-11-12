@@ -1,9 +1,7 @@
-<style type="text/css">
-  .hidden { display: none !important; }
+<div class="text-right">
+  <%= link_to 'Create Deck', new_user_deck_path(current_user), class: 'btn btn-md btn-success' %>
+</div>
 
-  #card-practice { display: flex; flex-direction: column; justify-content: center; align-items: center; }
-  #card-holder { border-radius: 10px; border: 1px solid black; text-align: center; width: 700px; height: 400px; display: flex; justify-content: center; align-items: center; }
-</style>
 
 <h1>Showing Deck "<%= @deck.name.titleize %>"</h1>
 <br>
@@ -24,9 +22,11 @@
   <%= content_tag :a, 'practice!', id: 'start-practice', class: 'js-toggle-practice' %>
 </div>
 
-<div id="card-practice" class="hidden">
-  <div id="card-holder">
-    <div id="card-text"></div>
+<div id="card-practice" class="hidden d-flex flex-column justify-content-center align-items-center">
+  <div id="card-holder" class="card d-flex flex-row justify-content-center align-items-center text-center">
+    <div class="card-body">
+      <div id="card-text"></div>
+    </div>
   </div>
 
   <br><br><br>
