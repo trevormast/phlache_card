@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+
+/*table        { margin: 20px auto 50px auto; max-width: 450px; }*/
+table th,
+table td     { padding: 12px; }
+
+
+.content-container      { display: flex; flex-direction: column; justify-content: center; align-items: center; }

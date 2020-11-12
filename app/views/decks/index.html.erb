@@ -1,12 +1,33 @@
-<%= link_to 'Create Deck', new_user_deck_path(current_user) %>
+<div class="text-right">
+  <%= link_to 'Create Deck', new_user_deck_path(current_user), class: 'btn btn-md btn-success' %>
+</div>
 
-<br><br>
 
-<% @decks.each do |deck| %>
-  <h3>
-    <%= link_to deck.name, user_deck_path(current_user, deck) %>
-    <%= link_to 'edit', edit_user_deck_path(current_user, deck) %>
-    <%= link_to 'delete', user_deck_path(current_user, deck), method: :delete %>
-  </h3>
-
-<% end %>
+<div class="content-container">
+  <br><br>
+  <h1>My Decks</h1>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @decks.each do |deck| %>
+        <tr>
+          <td>
+            <h3><%= link_to deck.name, user_deck_path(current_user, deck) %></h3>
+          </td>
+          <td>
+            <div class="btn-group">
+              <%= link_to 'edit', edit_user_deck_path(current_user, deck), class: 'btn btn-sm btn-primary' %>
+              <%= link_to 'delete', user_deck_path(current_user, deck), method: :delete, class: 'btn btn-sm btn-danger' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
