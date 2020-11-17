@@ -7,11 +7,18 @@ class DecksController < ApplicationController
 
   def show
     @deck = Deck.find(params[:id])
-    @cards = @deck.cards
 
     @react_layout = true
 
-    render 'react_show'
+    # render the deck with cards included
+    render 'react_show', locals: {
+      deck: @deck.to_json(
+        only: [:id, :name, :user_id],
+        include: {
+          cards: { only: [:id, :front, :back, :weight]
+        }
+      })
+    }
   end
 
   def new
