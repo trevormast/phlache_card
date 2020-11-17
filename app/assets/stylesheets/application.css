@@ -23,4 +23,4 @@ table td     { padding: 12px; }
 .content-container      { display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .hidden                 { display: none !important; }
 
-#card-holder  { width: 700px; height: 400px; }
+#card-holder  { width: 500px; height: 275px; }
