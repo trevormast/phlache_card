@@ -71,7 +71,7 @@ class DecksController < ApplicationController
     end
 
     def cards_params
-      params.require(:cards).permit(:id, :front, :back)
+      params.permit(cards: [:id, :front, :back])
     end
 
     def set_user

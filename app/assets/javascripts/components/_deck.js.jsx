@@ -13,7 +13,7 @@ class Deck extends React.Component {
     }
   }
 
-  // choose a card, letting the 'weight' determine the likelyhood of the card being chosen
+  // choose a card, letting the 'weight' determine the likelihood of the card being chosen
   chooseCard() {
     // get a random card
     let card = this.cards[Math.floor(Math.random() * this.cards.length)];

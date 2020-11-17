@@ -11,15 +11,15 @@
   <% @deck.cards.each_with_index do |card, index| %>
 
       <div class="d-flex flex-row justify-content align-items">
-        <%= hidden_field_tag :id, card.id, name: "cards[#{index}][id]" %>
+        <%= hidden_field_tag :id, card.id, name: "cards[][id]" %>
         <div class="form-group">
           <%= label_tag :front %>
-          <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[#{index}][front]" %>
+          <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[][front]" %>
         </div>
 
         <div class="form-group ml-2">
           <%= label_tag :back %>
-          <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[#{index}][back]" %>
+          <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[][back]" %>
         </div>
       </div>
   <% end %>
