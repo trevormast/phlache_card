@@ -1,3 +1,19 @@
+<style type="text/css">
+  @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+    html {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
+</style>
+
+
 <div id="deck-show">
   <div class="text-right">
     <%= link_to 'Edit Deck', edit_user_deck_path(current_user), class: 'btn btn-md btn-success' %>
