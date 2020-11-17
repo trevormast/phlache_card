@@ -1,12 +1,14 @@
 class Deck extends React.Component {
+  // create the deck
   constructor(props) {
     super(props);
 
     this.cards = props.deck.cards;
     this.handleCardClick = this.handleCardClick.bind(this);
 
+    // set the current card
     this.state = {
-      card: this.chooseCard()
+      currentCard: this.chooseCard()
     }
   }
 
@@ -25,14 +27,14 @@ class Deck extends React.Component {
 
   handleCardClick() {
     // set the state
-    this.setState({ card: this.chooseCard() });
+    this.setState({ currentCard: this.chooseCard() });
   }
 
   render() {
     return(
-      <div id="card-practice" className="d-flex flex-column justify-content-center align-items-center">
+      <div key={ this.state.currentCard.id } id="card-practice" className="d-flex flex-column justify-content-center align-items-center">
         <Card
-          card={ this.state.card }
+          card={ this.state.currentCard }
           deckHandler={ this.handleCardClick }
         />
       </div>
