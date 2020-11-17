@@ -1,3 +1,5 @@
+<% javascript_file_name = @react_layout ? 'react_application' : 'application' %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,7 +8,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag javascript_file_name, 'data-turbolinks-track': 'reload' %>
 
     <%= render partial: 'layouts/bootstrap' %>
   </head>

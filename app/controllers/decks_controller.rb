@@ -8,6 +8,10 @@ class DecksController < ApplicationController
   def show
     @deck = Deck.find(params[:id])
     @cards = @deck.cards
+
+    @react_layout = true
+
+    render 'react_show'
   end
 
   def new
