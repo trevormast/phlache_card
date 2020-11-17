@@ -46,7 +46,7 @@ class DecksController < ApplicationController
   def update
     @deck = Deck.find(params[:id])
 
-    card_sync = DeckCardSynchronizer.new(@deck, cards_params)
+    card_sync = DeckCardSynchronizer.new(@deck, params[:cards])
     # reset weight for updated cards
 
     # if there were no card sync errors and the deck is updated
@@ -68,10 +68,6 @@ class DecksController < ApplicationController
   private
     def deck_params
       params.require(:deck).permit(:name)
-    end
-
-    def cards_params
-      params.permit(cards: [:id, :front, :back])
     end
 
     def set_user
