@@ -3,6 +3,7 @@ class Deck extends React.Component {
     super(props);
 
     this.cards = props.deck.cards;
+    this.handleCardClick = this.handleCardClick.bind(this);
 
     this.state = {
       card: this.chooseCard()
@@ -22,14 +23,18 @@ class Deck extends React.Component {
     return this.chooseCard();
   }
 
+  handleCardClick() {
+    // set the state
+    this.setState({ card: this.chooseCard() });
+  }
+
   render() {
     return(
       <div id="card-practice" className="d-flex flex-column justify-content-center align-items-center">
-        <div id="card-holder" className="card d-flex flex-row justify-content-center align-items-center text-center">
-          <div className="card-body">
-            <div id="card-text">{ this.state.card.front }</div>
-          </div>
-        </div>
+        <Card
+          card={ this.state.card }
+          deckHandler={ this.handleCardClick }
+        />
       </div>
     )
   }
