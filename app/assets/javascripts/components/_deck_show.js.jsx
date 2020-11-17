@@ -2,11 +2,9 @@ const DeckShow = (props) => {
   console.log(props);
 
   return(
-    <div>
-      <h1>SHOWING REACT DECK</h1>
-      <div key={ props.id } >
-        <Deck deck={ props } />
-      </div>
+    <div key={ props.id } >
+      <h1>Showing Deck "{ props.name }"</h1>
+      <Deck deck={ props } />
     </div>
   )
 }

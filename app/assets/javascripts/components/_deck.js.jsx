@@ -24,11 +24,12 @@ class Deck extends React.Component {
 
   render() {
     return(
-      <div>
-        <h2>{ this.props.deck.name }</h2>
-        <br/><br/>
-        <h3>{ this.state.card.front }</h3>
-        <h3>{ this.state.card.back }</h3>
+      <div id="card-practice" className="d-flex flex-column justify-content-center align-items-center">
+        <div id="card-holder" className="card d-flex flex-row justify-content-center align-items-center text-center">
+          <div className="card-body">
+            <div id="card-text">{ this.state.card.front }</div>
+          </div>
+        </div>
       </div>
     )
   }
