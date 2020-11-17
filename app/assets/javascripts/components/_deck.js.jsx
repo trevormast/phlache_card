@@ -3,8 +3,9 @@ class Deck extends React.Component {
   constructor(props) {
     super(props);
 
+    // get the card from the props
     this.cards = props.deck.cards;
-    this.handleCardClick = this.handleCardClick.bind(this);
+    this.handleCardChange = this.handleCardChange.bind(this);
 
     // set the current card
     this.state = {
@@ -12,6 +13,7 @@ class Deck extends React.Component {
     }
   }
 
+  // choose a card, letting the 'weight' determine the likelyhood of the card being chosen
   chooseCard() {
     // get a random card
     let card = this.cards[Math.floor(Math.random() * this.cards.length)];
@@ -25,7 +27,8 @@ class Deck extends React.Component {
     return this.chooseCard();
   }
 
-  handleCardClick() {
+  // when the card is clicked for the second time, choose a new card
+  handleCardChange() {
     // set the state
     this.setState({ currentCard: this.chooseCard() });
   }
@@ -35,7 +38,7 @@ class Deck extends React.Component {
       <div key={ this.state.currentCard.id } id="card-practice" className="d-flex flex-column justify-content-center align-items-center">
         <Card
           card={ this.state.currentCard }
-          deckHandler={ this.handleCardClick }
+          deckHandler={ this.handleCardChange }
         />
       </div>
     )
