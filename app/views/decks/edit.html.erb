@@ -1,8 +1,30 @@
-<h1>Edit Deck: <%= @deck.name %></h1>
+<h1 class="text-center">Editing <%= @deck.name %></h1>
 
 <%= form_for @deck, url: user_deck_path(current_user, @deck) do |f| %>
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-  <%= f.submit %>
+  <br>
+
+  <% @deck.cards.each_with_index do |card, index| %>
+
+      <div class="d-flex flex-row justify-content align-items">
+        <%= hidden_field_tag :id, card.id, name: "cards[#{index}][id]" %>
+        <div class="form-group">
+          <%= label_tag :front %>
+          <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[#{index}][front]" %>
+        </div>
+
+        <div class="form-group ml-2">
+          <%= label_tag :back %>
+          <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[#{index}][back]" %>
+        </div>
+      </div>
+  <% end %>
+
+  <br><br>
+
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>

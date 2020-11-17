@@ -1,3 +1,5 @@
+require 'deck_card_synchronizer'
+
 class DecksController < ApplicationController
   before_action :set_user
 
@@ -6,12 +8,14 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = Deck.find(params[:id])
+    # get the deck
+    @deck = Deck.includes(:cards).find(params[:id])
 
+    # use the react layout
     @react_layout = true
 
     # render the deck with cards included
-    render 'react_show', locals: {
+    render 'show', locals: {
       deck: @deck.to_json(
         only: [:id, :name, :user_id],
         include: {
@@ -36,16 +40,20 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find(params[:id])
+    @deck = Deck.includes(:cards).find(params[:id])
   end
 
   def update
     @deck = Deck.find(params[:id])
 
-    if @deck.update(deck_params)
+    card_sync = DeckCardSynchronizer.new(@deck, cards_params)
+    # reset weight for updated cards
+
+    # if there were no card sync errors and the deck is updated
+    if card_sync.perform && @deck.update(deck_params)
       redirect_to user_decks_path(@user)
     else
-      redirect_to edit_user_deck(@user, @deck)
+      redirect_to edit_user_deck_path(@user, @deck)
     end
   end
 
@@ -60,6 +68,10 @@ class DecksController < ApplicationController
   private
     def deck_params
       params.require(:deck).permit(:name)
+    end
+
+    def cards_params
+      params.require(:cards).permit(:id, :front, :back)
     end
 
     def set_user

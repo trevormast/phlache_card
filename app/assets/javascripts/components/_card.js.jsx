@@ -24,7 +24,7 @@ class Card extends React.Component {
     return (
       <div id="card-holder" onClick={ this.handleCardClick } className="card d-flex flex-row justify-content-center align-items-center text-center">
         <div className="card-body">
-          <div id="card-text">{ cardText }</div>
+          <div id="card-text" className="font-weight-bold">{ cardText }</div>
         </div>
       </div>
     )

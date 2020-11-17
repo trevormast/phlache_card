@@ -1,68 +1,7 @@
-<div class="text-right">
-  <%= link_to 'Create Deck', new_user_deck_path(current_user), class: 'btn btn-md btn-success' %>
-</div>
-
-
-<h1>Showing Deck "<%= @deck.name.titleize %>"</h1>
-<br>
-<%= link_to 'New Card', new_user_deck_card_path(@user, @deck) %>
-<br><br>
-
-<div id="card-index">
-  <ul>
-    <% @cards.each do |card| %>
-      <li>
-        <%= card.front %>
-        <%= link_to 'edit', edit_user_deck_card_path(@user, @deck, card) %>
-        <%= link_to 'delete', user_deck_card_path(@user, @deck, card), method: :delete %>
-      </li>
-    <% end %>
-  </ul>
-  <br><br><br>
-  <%= content_tag :a, 'practice!', id: 'start-practice', class: 'js-toggle-practice' %>
-</div>
-
-<div id="card-practice" class="hidden d-flex flex-column justify-content-center align-items-center">
-  <div id="card-holder" class="card d-flex flex-row justify-content-center align-items-center text-center">
-    <div class="card-body">
-      <div id="card-text"></div>
-    </div>
+<div id="deck-show">
+  <div class="text-right">
+    <%= link_to 'Edit Deck', edit_user_deck_path(current_user), class: 'btn btn-md btn-success' %>
   </div>
 
-  <br><br><br>
-  <%= content_tag :a, 'end practice!', id: 'start-practice', class: 'js-toggle-practice' %>
+  <%= react_component 'DeckShow', deck %>
 </div>
-
-<script type="text/javascript">
-  const cardsArray = JSON.parse(`<%= @cards.to_json(only: [:front, :back, :weight]).html_safe %>`);
-
-  const deck = new Deck(cardsArray);
-
-  $(document).ready(function() {
-    $('.js-toggle-practice').click(togglePractice);
-
-    $('#start-practice').click(function() {
-      chooseCard();
-    })
-  })
-
-  function chooseCard() {
-    let card = deck.chooseCard();
-
-    $('#card-text').text(card.front);
-
-    $('#card-holder').click(function() { showAnswer(card); });
-  }
-
-  function showAnswer(card) {
-    let $cardHolder = $('#card-holder');
-
-    $cardHolder.unbind('click');
-
-    $('#card-text').text(card.back);
-
-    $cardHolder.click(chooseCard);
-  }
-
-  function togglePractice() { $('#card-practice, #card-index').toggleClass('hidden'); }
-</script>
