@@ -1,30 +1,37 @@
-<h1 class="text-center">Editing <%= @deck.name %></h1>
-
-<%= form_for @deck, url: user_deck_path(current_user, @deck) do |f| %>
-  <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class: 'form-control' %>
+<div id="deck-edit">
+  <div class="text-right">
+    <%= link_to 'Export CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-primary' %>
+    <%= link_to 'Import CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-success' %>
   </div>
 
-  <br>
+  <h1 class="text-center">Editing <%= @deck.name %></h1>
 
-  <% @deck.cards.each_with_index do |card, index| %>
+  <%= form_for @deck, url: user_deck_path(current_user, @deck) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
 
-      <div class="d-flex flex-row justify-content align-items">
-        <%= hidden_field_tag :id, card.id, name: "cards[][id]" %>
-        <div class="form-group">
-          <%= label_tag :front %>
-          <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[][front]" %>
+    <br>
+
+    <% @deck.cards.each_with_index do |card, index| %>
+
+        <div class="d-flex flex-row justify-content align-items">
+          <%= hidden_field_tag :id, card.id, name: "cards[][id]" %>
+          <div class="form-group">
+            <%= label_tag :front %>
+            <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[][front]" %>
+          </div>
+
+          <div class="form-group ml-2">
+            <%= label_tag :back %>
+            <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[][back]" %>
+          </div>
         </div>
+    <% end %>
 
-        <div class="form-group ml-2">
-          <%= label_tag :back %>
-          <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[][back]" %>
-        </div>
-      </div>
+    <br><br>
+
+    <%= f.submit class: 'btn btn-primary' %>
   <% end %>
-
-  <br><br>
-
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
+</div>
