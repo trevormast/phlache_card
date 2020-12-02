@@ -1,7 +1,7 @@
 <div id="deck-edit">
   <div class="text-right">
-    <%= link_to 'Export CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-primary' %>
-    <%= link_to 'Import CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-success' %>
+    <!-- <%= link_to 'Export CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-primary' %> -->
+    <!-- <%= link_to 'Import CSV', user_deck_card_imports_path(current_user, @deck), class: 'btn btn-md btn-success' %> -->
   </div>
 
   <h1 class="text-center">Editing <%= @deck.name %></h1>
@@ -14,21 +14,7 @@
 
     <br>
 
-    <% @deck.cards.each_with_index do |card, index| %>
-
-        <div class="d-flex flex-row justify-content align-items">
-          <%= hidden_field_tag :id, card.id, name: "cards[][id]" %>
-          <div class="form-group">
-            <%= label_tag :front %>
-            <%= text_field_tag :front, card.front, class: 'form-control', name: "cards[][front]" %>
-          </div>
-
-          <div class="form-group ml-2">
-            <%= label_tag :back %>
-            <%= text_field_tag :back, card.back, class: 'form-control', name: "cards[][back]" %>
-          </div>
-        </div>
-    <% end %>
+    <%= f.text_area :cards_text, value: raw(Card.display_cards(@deck.cards)), class: 'form-control', style: "white-space: pre-line;", rows: 10 %>
 
     <br><br>
 

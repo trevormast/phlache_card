@@ -24,9 +24,17 @@ class Card < ApplicationRecord
     end
   end
 
+  def self.display_cards(cards)
+    cards_attributes = cards.map do |card|
+      card.attributes_for_display.join("\n").prepend('#')
+    end
 
+    return cards_attributes.join("\n\n")
+  end
 
-
+  def attributes_for_display
+    return [front, back]
+  end
   # def weight=(value)
   #   # dont let the value be less than 0
   #   value = [0, value].max
