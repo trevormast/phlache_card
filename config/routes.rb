@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :decks, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       resources :cards, except: [:show, :index]
-      resources :card_imports, only: [:index, :create]
     end
   end
 end
