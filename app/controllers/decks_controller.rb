@@ -1,5 +1,3 @@
-require 'deck_card_synchronizer'
-
 class DecksController < ApplicationController
   before_action :set_user
 
