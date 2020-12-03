@@ -29,8 +29,8 @@ class CardBuilder
       cards_array = @cards_text.split("#").reject(&:blank?)
       # maps hashes representing card attributes (front & back)
       cards_attributes = cards_array.map do |card_text|
-        # split the card text by \n, resulting in an array with two strings
-        card_array = card_text.strip.split("\n").map(&:strip)
+        # split the card text by the first \n, resulting in an array with two strings
+        card_array = card_text.strip.split("\n", 2).map(&:strip)
         # match the attribute keys to the corresponding values
         Hash[%w(front back).zip(card_array)]
       end
